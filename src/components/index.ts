@@ -1,0 +1,1 @@
+export * from './sections/HeroV8'; 

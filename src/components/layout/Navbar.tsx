@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Brain, Zap } from 'lucide-react';
 import { Link } from '../ui/Link';
 import { Button } from '../ui/Button';
 import { Container } from '../ui/Container';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
-  { name: 'Services', href: '#services' },
-  { name: 'Portfolio', href: '#portfolio' },
+  { name: 'AI Solutions', href: '#services' },
+  { name: 'Blockchain', href: '#services' },
+  { name: 'Projects', href: '#portfolio' },
   { name: 'About', href: '#about' },
   { name: 'Blog', href: '#blog' },
 ];
@@ -47,10 +48,11 @@ export const Navbar: React.FC = () => {
               href="#home"
               className="text-xl font-bold tracking-tighter text-white flex items-center"
             >
-              <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent mr-1.5">
                 Neuralarc
               </span>
-              <span className="text-blue-400 ml-1">Matrix</span>
+              <span className="bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">Matrix</span>
+              <Brain size={18} className="ml-1.5 text-purple-400" />
             </Link>
           </div>
 
@@ -60,12 +62,22 @@ export const Navbar: React.FC = () => {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                className={`text-sm font-medium ${
+                  link.name === 'AI Solutions' 
+                    ? 'text-purple-400 font-semibold flex items-center gap-1.5' 
+                    : 'text-gray-300 hover:text-white transition-colors'
+                }`}
               >
+                {link.name === 'AI Solutions' && <Zap size={14} className="text-purple-400" />}
                 {link.name}
               </Link>
             ))}
-            <Button primary>Get Started</Button>
+            <Button
+              primary
+              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500"
+            >
+              Get Demo
+            </Button>
           </div>
 
           {/* Mobile Navigation Button */}
@@ -79,19 +91,29 @@ export const Navbar: React.FC = () => {
 
         {/* Mobile Navigation Menu */}
         {isOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-md">
+          <div className="md:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-md border-t border-purple-500/20">
             <div className="flex flex-col px-4 py-4 space-y-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="text-base font-medium text-gray-300 hover:text-white transition-colors"
+                  className={`text-base font-medium ${
+                    link.name === 'AI Solutions' 
+                      ? 'text-purple-400 font-semibold flex items-center gap-1.5' 
+                      : 'text-gray-300 hover:text-white transition-colors'
+                  }`}
                 >
+                  {link.name === 'AI Solutions' && <Zap size={14} className="text-purple-400" />}
                   {link.name}
                 </Link>
               ))}
-              <Button primary>Get Started</Button>
+              <Button
+                primary
+                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500"
+              >
+                Get Demo
+              </Button>
             </div>
           </div>
         )}

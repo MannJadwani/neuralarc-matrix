@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from '../ui/Container';
 import { Link } from '../ui/Link';
-import { Facebook, Twitter, Instagram, Linkedin, Github, Mail } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Linkedin, Github, Mail, Brain } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -13,28 +13,29 @@ export const Footer: React.FC = () => {
               href="#home"
               className="text-xl font-bold tracking-tighter text-white flex items-center mb-4"
             >
-              <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent mr-1.5">
                 Neuralarc
               </span>
-              <span className="text-blue-400 ml-1">Matrix</span>
+              <span className="bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">Matrix</span>
+              <Brain size={18} className="ml-1.5 text-purple-400" />
             </Link>
             <p className="text-gray-400 mb-6">
-              Pioneering the future with cutting-edge AI and blockchain solutions for forward-thinking businesses.
+              Empowering businesses with intelligent AI agents and secure blockchain solutions that transform operations, enhance security, and drive innovation.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
                 <Twitter size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
                 <Linkedin size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
                 <Github size={20} />
               </a>
             </div>
@@ -44,32 +45,32 @@ export const Footer: React.FC = () => {
             <h3 className="text-white font-semibold mb-6">Quick Links</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="#home" className="text-gray-400 hover:text-blue-400 transition-colors">
+                <Link href="#home" className="text-gray-400 hover:text-purple-400 transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="#services" className="text-gray-400 hover:text-blue-400 transition-colors">
-                  Services
+                <Link href="#services" className="text-gray-400 hover:text-purple-400 transition-colors">
+                  AI Solutions
                 </Link>
               </li>
               <li>
-                <Link href="#portfolio" className="text-gray-400 hover:text-blue-400 transition-colors">
-                  Portfolio
+                <Link href="#portfolio" className="text-gray-400 hover:text-purple-400 transition-colors">
+                  Projects
                 </Link>
               </li>
               <li>
-                <Link href="#about" className="text-gray-400 hover:text-blue-400 transition-colors">
+                <Link href="#about" className="text-gray-400 hover:text-purple-400 transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="#blog" className="text-gray-400 hover:text-blue-400 transition-colors">
-                  Blog
+                <Link href="#blog" className="text-gray-400 hover:text-purple-400 transition-colors">
+                  AI Research
                 </Link>
               </li>
               <li>
-                <Link href="#contact" className="text-gray-400 hover:text-blue-400 transition-colors">
+                <Link href="#contact" className="text-gray-400 hover:text-purple-400 transition-colors">
                   Contact
                 </Link>
               </li>
@@ -77,56 +78,56 @@ export const Footer: React.FC = () => {
           </div>
           
           <div>
-            <h3 className="text-white font-semibold mb-6">Services</h3>
+            <h3 className="text-white font-semibold mb-6">Our Solutions</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
-                  AI Development
+                <Link href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
+                  AI Agents & Automation
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
-                  Blockchain Solutions
+                <Link href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
+                  Enterprise AI Solutions
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
-                  Smart Contract Auditing
+                <Link href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
+                  Blockchain Development
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
-                  Web3 Development
+                <Link href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
+                  Smart Contracts
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
-                  DeFi Applications
+                <Link href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
+                  Knowledge & Research Tools
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
-                  Custom Software
+                <Link href="#" className="text-gray-400 hover:text-purple-400 transition-colors">
+                  AI-Blockchain Integration
                 </Link>
               </li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-white font-semibold mb-6">Newsletter</h3>
+            <h3 className="text-white font-semibold mb-6">AI Updates</h3>
             <p className="text-gray-400 mb-4">
-              Subscribe to our newsletter to receive updates on the latest in blockchain and AI technology.
+              Subscribe to receive insights on AI advancements, blockchain innovations, and our latest intelligent solutions.
             </p>
             <form className="mb-4">
               <div className="flex">
                 <input
                   type="email"
                   placeholder="Your email address"
-                  className="w-full bg-gray-800 border border-gray-700 rounded-l-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full bg-gray-800 border border-gray-700 rounded-l-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 />
                 <button
                   type="submit"
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-r-lg flex items-center justify-center transition-colors"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white px-4 py-2 rounded-r-lg flex items-center justify-center transition-colors"
                 >
                   <Mail size={18} />
                 </button>
