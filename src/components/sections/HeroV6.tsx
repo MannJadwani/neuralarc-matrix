@@ -96,14 +96,21 @@ export const HeroV6: React.FC = () => {
   }, [tabs.length]);
   
   return (
-    <div id="home" className="relative bg-gradient-to-b from-black to-gray-900 overflow-hidden">
+    <section 
+      id="home" 
+      className="relative bg-gradient-to-b from-black to-gray-900 overflow-hidden"
+      aria-label="Hero section"
+    >
       {/* Subtle grid overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiMyMDIwMjAiIHN0cm9rZS1vcGFjaXR5PSIwLjA1IiBzdHJva2Utd2lkdGg9IjEiPjxwYXRoIGQ9Ik0wIDBoNjB2NjBoLTYweiIvPjwvZz48L3N2Zz4=')] opacity-30"></div>
+      <div 
+        className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiMyMDIwMjAiIHN0cm9rZS1vcGFjaXR5PSIwLjA1IiBzdHJva2Utd2lkdGg9IjEiPjxwYXRoIGQ9Ik0wIDBoNjB2NjBoLTYweiIvPjwvZz48L3N2Zz4=')] opacity-30"
+        aria-hidden="true"
+      ></div>
       
       {/* Enhanced gradient accents */}
-      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500/10 blur-[100px] rounded-full animate-pulse-slow"></div>
-      <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-indigo-500/10 blur-[100px] rounded-full animate-pulse-slow"></div>
-      <div className="absolute top-1/3 left-1/4 w-1/5 h-1/5 bg-purple-500/5 blur-[80px] rounded-full animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500/10 blur-[100px] rounded-full animate-pulse-slow" aria-hidden="true"></div>
+      <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-indigo-500/10 blur-[100px] rounded-full animate-pulse-slow" aria-hidden="true"></div>
+      <div className="absolute top-1/3 left-1/4 w-1/5 h-1/5 bg-purple-500/5 blur-[80px] rounded-full animate-pulse-slow" style={{ animationDelay: '1s' }} aria-hidden="true"></div>
       
       <Container className="relative z-10">
         <div className="min-h-screen flex flex-col justify-center py-20">
@@ -146,27 +153,28 @@ export const HeroV6: React.FC = () => {
                   </p>
                   
                   <div className="flex flex-wrap gap-4 items-center mb-16">
-                  <a href="#contact" className="flex items-center">
-
-                    <Button primary className="px-6 py-3 group">
+                    <a href="#contact" className="flex items-center" aria-label="Get Started">
+                      <Button primary className="px-6 py-3 group">
                         Get Started
                         <motion.div
                           className="ml-2"
                           animate={{ x: [0, 4, 0] }}
                           transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                          aria-hidden="true"
                         >
-                          <ArrowRight className="w-4 h-4" />
+                          <ArrowRight className="size-4" />
                         </motion.div>
-                    </Button>
+                      </Button>
                     </a>
                     
                     <Button secondary outlined className="px-6 py-3 group">
-                      <a href="#contact" className="flex items-center">
+                      <a href="#contact" className="flex items-center" aria-label="Get Demo">
                         Get Demo
                         <motion.div
                           className="ml-2"
                           animate={{ x: [0, 4, 0] }}
                           transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                          aria-hidden="true"
                         >
                           <ArrowRight className="w-4 h-4" />
                         </motion.div>
@@ -175,13 +183,14 @@ export const HeroV6: React.FC = () => {
                   </div>
                   
                   {/* Stats with animation */}
-                  <div className="grid grid-cols-3 gap-4 mb-8">
+                  <div className="grid grid-cols-3 gap-4 mb-8" role="list" aria-label="Key statistics">
                     <motion.div 
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2 }}
                       whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.1)" }}
                       className="border border-white/5 rounded-lg p-4 bg-white/5 backdrop-blur-sm transition-all duration-300"
+                      role="listitem"
                     >
                       <motion.div 
                         className="text-3xl font-bold text-white mb-1"
@@ -199,6 +208,7 @@ export const HeroV6: React.FC = () => {
                       transition={{ delay: 0.4 }}
                       whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(99, 102, 241, 0.1)" }}
                       className="border border-white/5 rounded-lg p-4 bg-white/5 backdrop-blur-sm transition-all duration-300"
+                      role="listitem"
                     >
                       <motion.div 
                         className="text-3xl font-bold text-white mb-1"
@@ -216,6 +226,7 @@ export const HeroV6: React.FC = () => {
                       transition={{ delay: 0.6 }}
                       whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(139, 92, 246, 0.1)" }}
                       className="border border-white/5 rounded-lg p-4 bg-white/5 backdrop-blur-sm transition-all duration-300"
+                      role="listitem"
                     >
                       <motion.div 
                         className="text-3xl font-bold text-white mb-1"
@@ -592,6 +603,6 @@ export const HeroV6: React.FC = () => {
           }
         `}
       </style>
-    </div>
+    </section>
   );
 }; 
