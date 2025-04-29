@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Section } from '../ui/Section';
 import { Button } from '../ui/Button';
 import { Mail, MapPin, Phone, Bot, Zap, Calendar } from 'lucide-react';
+import { createClient } from '@supabase/supabase-js';
+
+// Initialize Supabase client
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL || '',
+  import.meta.env.VITE_SUPABASE_ANON_KEY || ''
+);
 
 interface ContactInfoProps {
   icon: React.ReactNode;
@@ -12,7 +19,7 @@ interface ContactInfoProps {
 
 const ContactInfo: React.FC<ContactInfoProps> = ({ icon, title, details, link }) => {
   return (
-    <div id="contact" className="flex items-start">
+    <div className="flex items-start">
       <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-purple-500/10 text-purple-400 mr-4">
         {icon}
       </div>
@@ -31,6 +38,69 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ icon, title, details, link })
 };
 
 export const Contact: React.FC = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    interest: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const handleSubmit = async () => {
+    // Validate form data
+    if (!formData.name || !formData.email || !formData.interest || !formData.message) {
+      setSubmitStatus('error');
+      setErrorMessage('Please fill in all fields');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    // Log the form data and environment variables (without sensitive data)
+    console.log('Form Data:', formData);
+    console.log('Supabase URL exists:', !!import.meta.env.VITE_SUPABASE_URL);
+    console.log('Supabase Anon Key exists:', !!import.meta.env.VITE_SUPABASE_ANON_KEY);
+
+    try {
+      const { data, error } = await supabase
+        .from('matrix_contact')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            interest: formData.interest,
+            message: formData.message,
+            created_at: new Date().toISOString()
+          }
+        ])
+        .select();
+
+      if (error) {
+        console.error('Supabase Error:', error);
+        throw error;
+      }
+
+      console.log('Success Response:', data);
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', interest: '', message: '' });
+    } catch (error: any) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+      setErrorMessage(error.message || 'An error occurred while submitting the form');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
   return (
     <Section id="contact">
       <div className="text-center mb-16">
@@ -61,8 +131,8 @@ export const Contact: React.FC = () => {
               <ContactInfo 
                 icon={<Mail size={24} />}
                 title="Email Us"
-                details="ai-solutions@neuralarc.com"
-                link="mailto:ai-solutions@neuralarc.com"
+                details="mann@neuralarc.in"
+                link="mailto:mann@neuralarc.in"
               />
               
               <ContactInfo 
@@ -119,7 +189,7 @@ export const Contact: React.FC = () => {
         <div className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-xl border border-gray-800">
           <h3 className="text-xl font-semibold text-white mb-6">Tell Us About Your Project</h3>
           
-          <form>
+          <div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
               <div>
                 <label htmlFor="name" className="block text-gray-300 mb-2 text-sm">
@@ -128,6 +198,10 @@ export const Contact: React.FC = () => {
                 <input
                   type="text"
                   id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
                   className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="John Doe"
                 />
@@ -140,6 +214,10 @@ export const Contact: React.FC = () => {
                 <input
                   type="email"
                   id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
                   className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="john@example.com"
                 />
@@ -152,6 +230,10 @@ export const Contact: React.FC = () => {
               </label>
               <select
                 id="interest"
+                name="interest"
+                value={formData.interest}
+                onChange={handleChange}
+                required
                 className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               >
                 <option value="">Select your primary interest</option>
@@ -168,16 +250,37 @@ export const Contact: React.FC = () => {
               </label>
               <textarea
                 id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
                 rows={5}
                 className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
                 placeholder="Describe the process or challenge you'd like to automate with AI..."
               ></textarea>
             </div>
             
-            <Button primary className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500">
-              Request AI Consultation
+            {submitStatus === 'success' && (
+              <div className="mb-4 p-4 bg-green-500/10 border border-green-500/20 rounded-lg text-green-400">
+                Thank you for your message! We'll get back to you soon.
+              </div>
+            )}
+            
+            {submitStatus === 'error' && (
+              <div className="mb-4 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400">
+                {errorMessage || 'There was an error submitting your message. Please try again.'}
+              </div>
+            )}
+            
+            <Button 
+              primary 
+              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500"
+              disabled={isSubmitting}
+              onClick={handleSubmit}
+            >
+              {isSubmitting ? 'Submitting...' : 'Request AI Consultation'}
             </Button>
-          </form>
+          </div>
         </div>
       </div>
     </Section>
